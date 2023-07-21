@@ -11,7 +11,7 @@ class User {
   @Column({ type: "varchar", length: 255, unique: true })
   email: string
 
-  @Column({ type: "int", unique: true })
+  @Column({ type: "char", unique: true, length: 11 })
   cpf: number
 
   @Column({ type: "text", select: false })
