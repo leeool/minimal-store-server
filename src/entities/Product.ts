@@ -11,10 +11,10 @@ class Product {
   @Column({ type: "text" })
   description: string
 
-  @Column({ type: "text", array: true })
+  @Column({ type: "text", array: true, nullable: true })
   images: string[]
 
-  @Column({ type: "int" })
+  @Column({ type: "decimal" })
   price: number
 }
 
