@@ -11,6 +11,9 @@ class User {
   @Column({ type: "varchar", length: 255 })
   email: string
 
+  @Column({ type: "int" })
+  cpf: number
+
   @Column({ type: "text", select: false })
   password: string
 
