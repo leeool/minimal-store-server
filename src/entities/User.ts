@@ -8,19 +8,19 @@ class User {
   @Column({ type: "varchar", length: 255 })
   name: string
 
-  @Column({ type: "varchar", length: 255 })
+  @Column({ type: "varchar", length: 255, unique: true })
   email: string
 
-  @Column({ type: "int" })
+  @Column({ type: "int", unique: true })
   cpf: number
 
   @Column({ type: "text", select: false })
   password: string
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   address: string
 
-  @Column({ type: "char", length: 15 })
+  @Column({ type: "char", length: 15, nullable: true, unique: true })
   phoneNumber: string
 }
 
