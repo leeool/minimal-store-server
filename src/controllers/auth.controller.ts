@@ -32,6 +32,14 @@ class AuthController {
   async signUp(req: Request, res: Response) {
     const { name, email, password, cpf } = req.body
 
+    const userExists = await userRepository.findOne({
+      where: [{ email }, { cpf }]
+    })
+
+    if (userExists) {
+      return res.status(409).json({ error: "CPF or e-mail already exists" })
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10)
 
     const user = userRepository.create({
