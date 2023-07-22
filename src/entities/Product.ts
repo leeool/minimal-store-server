@@ -1,4 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn
+} from "typeorm"
+import User from "./User"
+import Category from "./Category"
+import CartItem from "./CartItem"
 
 @Entity("products")
 class Product {
@@ -16,6 +26,15 @@ class Product {
 
   @Column({ type: "decimal" })
   price: number
+
+  @ManyToMany(() => User, (user) => user.favorites)
+  userFavorites: User[]
+
+  @ManyToOne(() => Category, (category) => category.products)
+  category: Category
+
+  @OneToMany(() => CartItem, (cartItem) => cartItem.product)
+  cartItem: CartItem
 }
 
 export default Product
