@@ -31,7 +31,7 @@ class CartController {
     })
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" })
+      return res.status(404).json({ error: "User not found" })
     }
 
     const product = await productRepository.findOne({
@@ -39,7 +39,7 @@ class CartController {
     })
 
     if (!product) {
-      return res.status(404).json({ message: "Product not found" })
+      return res.status(404).json({ error: "Product not found" })
     }
 
     let userCart = user.cart

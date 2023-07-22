@@ -27,13 +27,13 @@ class UserFavoriteController {
     })
 
     if (!user) {
-      return res.status(400).json({ message: "User not found" })
+      return res.status(400).json({ error: "User not found" })
     }
 
     const products = await productRepository.findOneBy({ id: productId })
 
     if (!products) {
-      return res.status(400).json({ message: "Product not found" })
+      return res.status(400).json({ error: "Product not found" })
     }
 
     await userRepository.save({
@@ -54,13 +54,13 @@ class UserFavoriteController {
     })
 
     if (!user) {
-      return res.status(400).json({ message: "User not found" })
+      return res.status(400).json({ error: "User not found" })
     }
 
     const products = await productRepository.findOneBy({ id: productId })
 
     if (!products) {
-      return res.status(400).json({ message: "Product not found" })
+      return res.status(400).json({ error: "Product not found" })
     }
 
     await userRepository.save({

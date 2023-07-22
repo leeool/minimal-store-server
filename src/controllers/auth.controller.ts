@@ -13,13 +13,13 @@ class AuthController {
     })
 
     if (!user) {
-      return res.status(404).json({ error: "E-mail ou senha incorretos" })
+      return res.status(404).json({ error: "Incorrect e-mail or password" })
     }
 
     const passwordMatched = await bcrypt.compare(password, user.password)
 
     if (!passwordMatched) {
-      return res.status(404).json({ error: "E-mail ou senha incorretos" })
+      return res.status(404).json({ error: "Incorrect e-mail or password " })
     }
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, {
@@ -54,7 +54,7 @@ class AuthController {
     const { authorization } = req.headers
 
     if (!authorization) {
-      return res.status(401).json({ error: "Token não informado" })
+      return res.status(401).json({ error: "Token not found" })
     }
 
     const [, token] = authorization.split(" ")
@@ -70,7 +70,7 @@ class AuthController {
 
       return res.json(user)
     } catch (error) {
-      return res.status(401).json({ error: "Token inválido" })
+      return res.status(401).json({ error: "Invalid token" })
     }
   }
 }

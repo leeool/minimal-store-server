@@ -10,7 +10,7 @@ class CartItemController {
     })
 
     if (!cartItem) {
-      return res.status(404).json({ message: "Cart item not found" })
+      return res.status(404).json({ error: "Cart item not found" })
     }
 
     await cartItemRepository.delete({ id })
@@ -26,7 +26,7 @@ class CartItemController {
     })
 
     if (!cartItem) {
-      return res.status(404).json({ message: "Cart item not found" })
+      return res.status(404).json({ error: "Cart item not found" })
     }
 
     await cartItemRepository.increment({ id }, "quantity", 1)
@@ -42,13 +42,13 @@ class CartItemController {
     })
 
     if (!cartItem) {
-      return res.status(404).json({ message: "Cart item not found" })
+      return res.status(404).json({ error: "Cart item not found" })
     }
 
     if (cartItem.quantity === 1) {
       return res
         .status(400)
-        .json({ message: "Cart item quantity cannot be less than 1" })
+        .json({ error: "Cart item quantity cannot be less than 1" })
     }
 
     await cartItemRepository.decrement({ id }, "quantity", 1)
