@@ -6,7 +6,10 @@ import orderController from "@controllers/order.controller"
 import productController from "@controllers/product.controller"
 import userController from "@controllers/user.controller"
 import userFavoriteController from "@controllers/userFavorite.controller"
+import auth from "@middlewares/auth.middleware"
+import verifyUser from "@middlewares/verifyUser.middleware"
 import { Router } from "express"
+import "express-async-errors"
 
 const routes = Router()
 
@@ -18,15 +21,19 @@ routes.get("/user/:id", userController.show)
 routes.get("/user", userController.index)
 routes.post("/user", userController.store)
 
-routes.get("/user/:id/favorites", userFavoriteController.showByUser)
-routes.post("/user/:id/favorites", userFavoriteController.store)
-routes.delete("/user/:id/favorites", userFavoriteController.delete)
+routes.get(
+  "/favorites/:id",
+  auth,
+  verifyUser,
+  userFavoriteController.showByUser
+)
+routes.post("/favorites/:id", userFavoriteController.store)
+routes.delete("/favorites/:id", userFavoriteController.delete)
 
 routes.get("/product/category/:id", categoryController.show)
 routes.get("/product/category", categoryController.index)
 routes.post("/product/category", categoryController.store)
 
-routes.get("/product/:id/:categoryId", productController.showByCategory)
 routes.get("/product/:id", productController.show)
 routes.put("/product/:id", productController.update)
 routes.get("/product", productController.index)
