@@ -35,17 +35,6 @@ class ProductController {
     return res.json(product)
   }
 
-  async showByCategory(req: Request, res: Response) {
-    const { id, categoryId } = req.params
-
-    const products = await productRepository.find({
-      where: { id, category: { id: categoryId } },
-      relations: { category: true }
-    })
-
-    return res.json(products)
-  }
-
   async update(req: Request, res: Response) {
     const { id } = req.params
     const { name, description, images, price, categoryId } = req.body
@@ -53,18 +42,20 @@ class ProductController {
     const product = await productRepository.findOneBy({ id })
 
     if (!product) {
-      return res.status(400).json({ message: "Product not found" })
+      return res.status(400).json({ error: "Product not found" })
     }
 
     const category = await categoryRepository.findOneBy({ id: categoryId })
 
     const updatedProduct = productRepository.create({
       ...product,
-      name,
-      description,
-      images,
-      price,
-      category: category || product.category
+      ...{
+        name,
+        description,
+        images,
+        price,
+        category: category || product.category
+      }
     })
 
     await productRepository.save(updatedProduct)

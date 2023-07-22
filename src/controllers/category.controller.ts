@@ -11,7 +11,10 @@ class CategoryController {
   async show(req: Request, res: Response) {
     const { id } = req.params
 
-    const category = categoryRepository.findOneBy({ id })
+    const category = await categoryRepository.findOne({
+      where: { id },
+      relations: { products: true }
+    })
 
     return res.json(category)
   }
