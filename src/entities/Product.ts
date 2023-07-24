@@ -33,7 +33,9 @@ class Product {
   @ManyToOne(() => Category, (category) => category.products)
   category: Category
 
-  @OneToMany(() => CartItem, (cartItem) => cartItem.product)
+  @OneToMany(() => CartItem, (cartItem) => cartItem.product, {
+    cascade: ["remove"]
+  })
   cartItem: CartItem
 }
 

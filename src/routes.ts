@@ -36,6 +36,7 @@ routes.post("/product/category", categoryController.store)
 
 routes.get("/product/:id", productController.show)
 routes.put("/product/:id", productController.update)
+routes.delete("/product/:id", productController.delete)
 routes.get("/product", productController.index)
 routes.post("/product", productController.store)
 

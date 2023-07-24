@@ -16,7 +16,11 @@ class CartItem {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @ManyToOne(() => Product, (product) => product.cartItem, { eager: true })
+  @ManyToOne(() => Product, (product) => product.cartItem, {
+    eager: true,
+    onDelete: "CASCADE",
+    orphanedRowAction: "delete"
+  })
   @JoinColumn()
   product: Product
 
