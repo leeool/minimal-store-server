@@ -23,11 +23,20 @@ class ProductController {
   async store(req: Request, res: Response) {
     const { name, description, images, price } = req.body
 
+    const removeSpecialChars = /[^A-Za-z0-9\s-]/g
+
+    const slug = (name as string)
+      .normalize("NFD")
+      .replaceAll(removeSpecialChars, "")
+      .toLowerCase()
+      .replaceAll(/ /g, "-")
+
     const product = productRepository.create({
       name,
       description,
       images,
-      price
+      price,
+      slug
     })
 
     await productRepository.save(product)

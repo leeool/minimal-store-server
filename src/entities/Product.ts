@@ -18,6 +18,9 @@ class Product {
   @Column({ type: "varchar", length: 255 })
   name: string
 
+  @Column({ type: "varchar", length: 255, unique: true, nullable: true })
+  slug: string
+
   @Column({ type: "text" })
   description: string
 
