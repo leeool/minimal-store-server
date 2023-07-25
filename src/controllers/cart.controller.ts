@@ -23,7 +23,8 @@ class CartController {
   }
 
   async store(req: Request, res: Response) {
-    const { userId, productId } = req.body
+    const { productId } = req.body
+    const { userId } = req.params
 
     const user = await userRepository.findOne({
       where: { id: userId },

@@ -2,10 +2,18 @@ import AppDataSource from "@dataSource"
 import errorMiddleware from "@middlewares/error.middleware"
 import routes from "@routes"
 import Express from "express"
+import cors from "cors"
 import "express-async-errors"
 
 AppDataSource.initialize().then(() => {
   const app = Express()
+
+  app.use(
+    cors({
+      origin: process.env.CLIENT_URL
+      // credentials: true
+    })
+  )
 
   app.use(Express.json())
   app.use(Express.urlencoded({ extended: true }))

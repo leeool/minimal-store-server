@@ -46,10 +46,10 @@ routes.delete("/cart-item/:id", cartItemController.delete)
 
 routes.get("/cart/:userId", cartController.show)
 routes.get("/cart", cartController.index)
-routes.post("/cart", cartController.store)
+routes.post("/cart/:userId", auth, verifyUser, cartController.store)
 
 routes.get("/order/:id", orderController.show)
 routes.get("/order", orderController.index)
-routes.post("/order", orderController.store)
+routes.post("/order/:userId", auth, verifyUser, orderController.store)
 
 export default routes

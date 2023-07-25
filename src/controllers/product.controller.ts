@@ -21,7 +21,7 @@ class ProductController {
   }
 
   async store(req: Request, res: Response) {
-    const { name, description, images, price } = req.body
+    const { name, description, images, price, categoryId } = req.body
 
     const removeSpecialChars = /[^A-Za-z0-9\s-]/g
 
@@ -31,12 +31,15 @@ class ProductController {
       .toLowerCase()
       .replaceAll(/ /g, "-")
 
+    const category = await categoryRepository.findOneBy({ id: categoryId })
+
     const product = productRepository.create({
       name,
       description,
       images,
       price,
-      slug
+      slug,
+      category: category || undefined
     })
 
     await productRepository.save(product)

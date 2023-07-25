@@ -28,7 +28,8 @@ class OrderController {
   }
 
   async store(req: Request, res: Response) {
-    const { userId, cartId } = req.body
+    const { cartId } = req.body
+    const { userId } = req.params
 
     const user = await userRepository.findOne({
       where: { id: userId }

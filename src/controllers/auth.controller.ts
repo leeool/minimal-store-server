@@ -30,7 +30,7 @@ class AuthController {
   }
 
   async signUp(req: Request, res: Response) {
-    const { name, email, password, cpf } = req.body
+    const { name, email, password, cpf, address } = req.body
 
     const userExists = await userRepository.findOne({
       where: [{ email }, { cpf }]
@@ -46,7 +46,8 @@ class AuthController {
       name,
       email,
       password: hashedPassword,
-      cpf
+      cpf,
+      address
     })
 
     await userRepository.save(user)

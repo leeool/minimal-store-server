@@ -21,9 +21,9 @@ class UserController {
   }
 
   async store(req: Request, res: Response) {
-    const { name, email, password, cpf } = req.body
+    const { name, email, password, cpf, address } = req.body
 
-    const user = userRepository.create({ name, email, password, cpf })
+    const user = userRepository.create({ name, email, password, cpf, address })
 
     await userRepository.save(user)
 
