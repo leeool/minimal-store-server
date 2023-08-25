@@ -13,7 +13,8 @@
 4. Copie o conteúdo do arquivo
 5. Crie um novo arquivo chamado `.env` na raiz do projeto e cole o conteúdo copiado
 6. Preencha as variáveis de ambiente
-7. Rode o projeto com `npm run dev` ou `yarn dev` ou `pnpm dev 
+7. Rode as migrations com `npm migrations:generate` seguido de `npm migrations:run`
+8. Rode o projeto com `npm run dev` ou `yarn dev` ou `pnpm dev 
 
 
 ## Principais tecnologias utilizadas
